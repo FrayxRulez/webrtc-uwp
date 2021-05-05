@@ -260,6 +260,10 @@ config("common_config") {
     defines += [ "WEBRTC_INCLUDE_INTERNAL_AUDIO_DEVICE" ]
   }
 
+  if (rtc_win_video_capture_winrt) {
+    defines += [ "WEBRTC_VIDEO_CAPTURE_WINRT" ]
+  }
+
   if (rtc_libvpx_build_vp9) {
     defines += [ "RTC_ENABLE_VP9" ]
   }
@@ -306,7 +310,7 @@ config("common_config") {
 
   # TODO(webrtc:13219): Fix -Wshadow instances and enable.
   if (is_clang) {
-    cflags += [ "-Wno-shadow" ]
+    #cflags += [ "-Wno-shadow" ]
   }
 
   if (build_with_chromium) {
@@ -364,6 +368,8 @@ config("common_config") {
       cflags +=
           [ "/wd5041" ]  # out-of-line definition for constexpr static data
                          # member is not needed and is deprecated in C++17
+
+      cflags += [ "/wd4800", "/wd4267", "/wd4996", "/WX", "/wd4091", "/wd4127", "/wd4251", "/wd4275", "/wd4312", "/wd4324", "/wd4351", "/wd4355", "/wd4503", "/wd4589", "/wd4611", "/wd4100", "/wd4121", "/wd4244", "/wd4505", "/wd4510", "/wd4512", "/wd4610", "/wd4838", "/wd4995", "/wd4996", "/wd4456", "/wd4457", "/wd4458", "/wd4459", "/wd4200", "/wd4201", "/wd4204", "/wd4221", "/wd4245", "/wd4267", "/wd4305", "/wd4389", "/wd4702", "/wd4701", "/wd4703", "/wd4661", "/wd4706", "/wd4715" ]
     }
   }
 
