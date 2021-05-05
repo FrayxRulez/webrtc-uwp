@@ -89,6 +89,7 @@ class RTC_EXPORT StreamInterface {
   virtual StreamResult Read(rtc::ArrayView<uint8_t> buffer,
                             size_t& read,
                             int& error) {
+#pragma warning(suppress : 4996)
     return Read(buffer.data(), buffer.size(), &read, &error);
   }
 #pragma clang diagnostic pop
@@ -107,6 +108,7 @@ class RTC_EXPORT StreamInterface {
   virtual StreamResult Write(rtc::ArrayView<const uint8_t> data,
                              size_t& written,
                              int& error) {
+#pragma warning(suppress : 4996)
     return Write(data.data(), data.size(), &written, &error);
   }
 #pragma clang diagnostic pop
@@ -149,6 +151,7 @@ class RTC_EXPORT StreamInterface {
   StreamResult WriteAll(ArrayView<const uint8_t> data,
                         size_t& written,
                         int& error) {
+#pragma warning(suppress : 4996)
     return WriteAll(data.data(), data.size(), &written, &error);
   }
 #pragma clang diagnostic pop
