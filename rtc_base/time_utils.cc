@@ -15,7 +15,18 @@
 #endif
 
 #if defined(WEBRTC_WIN)
+// clang-format off
+// clang formatting would put <windows.h> last,
+// which leads to compilation failure.
+#include <windows.h>
+#include <mmsystem.h>
 #include <sys/timeb.h>
+
+#if defined(WINUWP)
+#include "rtc_base/numerics/safe_conversions.h"
+#endif
+
+// clang-format on
 #endif
 
 #include "rtc_base/checks.h"
