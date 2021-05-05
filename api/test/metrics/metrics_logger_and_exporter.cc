@@ -55,7 +55,7 @@ void MetricsLoggerAndExporter::LogSingleValueMetric(
     ImprovementDirection improvement_direction,
     std::map<std::string, std::string> metadata) {
   MutexLock lock(&mutex_);
-  metrics_.push_back(Metric{
+  /* metrics_.push_back(Metric{
       .name = std::string(name),
       .unit = unit,
       .improvement_direction = improvement_direction,
@@ -65,7 +65,7 @@ void MetricsLoggerAndExporter::LogSingleValueMetric(
           Metric::TimeSeries{.samples = std::vector{Metric::TimeSeries::Sample{
                                  .timestamp = Now(), .value = value}}},
       .stats = Metric::Stats{
-          .mean = value, .stddev = absl::nullopt, .min = value, .max = value}});
+          .mean = value, .stddev = absl::nullopt, .min = value, .max = value}});*/
 }
 
 void MetricsLoggerAndExporter::LogMetric(

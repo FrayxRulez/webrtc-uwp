@@ -182,6 +182,8 @@ bool RtpTransport::UnregisterRtpDemuxerSink(RtpPacketSinkInterface* sink) {
 
 void RtpTransport::DemuxPacket(rtc::CopyOnWriteBuffer packet,
                                int64_t packet_time_us) {
+  rtc::CopyOnWriteBuffer packetData = packet;
+
   webrtc::RtpPacketReceived parsed_packet(
       &header_extension_map_, packet_time_us == -1
                                   ? Timestamp::MinusInfinity()
@@ -192,10 +194,13 @@ void RtpTransport::DemuxPacket(rtc::CopyOnWriteBuffer packet,
     return;
   }
 
+  bool isUnresolved = false;
   if (!rtp_demuxer_.OnRtpPacket(parsed_packet)) {
+    isUnresolved = true;
     RTC_LOG(LS_WARNING) << "Failed to demux RTP packet: "
                         << RtpDemuxer::DescribePacket(parsed_packet);
   }
+  ProcessRtpPacket(parsed_packet, isUnresolved);
 }
 
 bool RtpTransport::IsTransportWritable() {
