@@ -138,6 +138,14 @@ rtc_library("rtc_base_approved") {
       "win/windows_version.cc",
       "win/windows_version.h",
     ]
+    if (current_os == "winuwp") {
+      sources -= [
+        "win/get_activation_factory.cc",
+        "win/get_activation_factory.h",
+        "win/hstring.cc",
+        "win/hstring.h",
+      ]
+    }
     data_deps = [ "//build/win:runtime_libs" ]
   }
 
@@ -882,6 +890,13 @@ if (is_win) {
       "win32_window.h",
     ]
 
+    if (current_os == "winuwp") {
+      sources -= [
+        "win32_window.cc",
+        "win32_window.h",
+      ]
+    }
+
     deps = [
       ":checks",
       ":macromagic",
@@ -1092,7 +1107,28 @@ rtc_library("rtc_base") {
   }
 
   if (is_win) {
-    deps += [ ":win32" ]
+    sources += [
+      "win32.cc",
+      "win32.h",
+      "win32_window.cc",
+      "win32_window.h",
+    ]
+
+    if (current_os == "winuwp") {
+      sources -= [
+        "win32_window.cc",
+        "win32_window.h",
+      ]
+    }
+
+    libs += [
+      "crypt32.lib",
+      "iphlpapi.lib",
+      "secur32.lib",
+    ]
+
+    defines += [ "_CRT_NONSTDC_NO_DEPRECATE" ]
+    # deps += [ ":win32" ]
   }
 
   if (is_posix || is_fuchsia) {

@@ -185,15 +185,18 @@ void RtpTransport::DemuxPacket(rtc::CopyOnWriteBuffer packet,
       &header_extension_map_, packet_time_us == -1
                                   ? Timestamp::MinusInfinity()
                                   : Timestamp::Micros(packet_time_us));
-  if (!parsed_packet.Parse(std::move(packet))) {
+  if (!parsed_packet.Parse(packet)) {
     RTC_LOG(LS_ERROR)
         << "Failed to parse the incoming RTP packet before demuxing. Drop it.";
     return;
   }
 
   if (!rtp_demuxer_.OnRtpPacket(parsed_packet)) {
+    SignalRtpPacketReceived.emit(&packet, packet_time_us, true);
     RTC_LOG(LS_WARNING) << "Failed to demux RTP packet: "
                         << RtpDemuxer::DescribePacket(parsed_packet);
+  } else {
+    SignalRtpPacketReceived.emit(&packet, packet_time_us, false);
   }
 }
 
