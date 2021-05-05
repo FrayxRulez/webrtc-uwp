@@ -54,6 +54,7 @@ class WebRtcVoiceEngine final : public VoiceEngineInterface {
       const rtc::scoped_refptr<webrtc::AudioDecoderFactory>& decoder_factory,
       rtc::scoped_refptr<webrtc::AudioMixer> audio_mixer,
       rtc::scoped_refptr<webrtc::AudioProcessing> audio_processing,
+      std::function<void(uint32_t)> onUnknownAudioSsrc,
       webrtc::AudioFrameProcessor* audio_frame_processor,
       const webrtc::WebRtcKeyValueConfig& trials);
 
@@ -132,6 +133,8 @@ class WebRtcVoiceEngine final : public VoiceEngineInterface {
   bool audio_jitter_buffer_fast_accelerate_ = false;
   int audio_jitter_buffer_min_delay_ms_ = 0;
   bool audio_jitter_buffer_enable_rtx_handling_ = false;
+    
+  std::function<void(uint32_t)> onUnknownAudioSsrc_ = nullptr;
 
   // If this field trial is enabled, we will negotiate and use RFC 2198
   // redundancy for opus audio.
