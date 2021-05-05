@@ -54,6 +54,8 @@ struct MediaEngineDependencies {
   std::unique_ptr<webrtc::VideoDecoderFactory> video_decoder_factory;
 
   const webrtc::WebRtcKeyValueConfig* trials = nullptr;
+    
+  std::function<void(uint32_t)> onUnknownAudioSsrc = nullptr;
 };
 
 // CreateMediaEngine may be called on any thread, though the engine is
