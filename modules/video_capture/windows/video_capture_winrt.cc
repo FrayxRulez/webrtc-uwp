@@ -266,7 +266,7 @@ HRESULT VideoCaptureWinRTInternal::StartCapture(
         VideoType video_type = ToVideoType(sub_type);
         if (video_type != capability.videoType &&
             video_type != VideoType::kI420 && video_type != VideoType::kYUY2 &&
-            video_type != VideoType::kYV12 && video_type != VideoType::kNV12) {
+            video_type != VideoType::kYV12) {
           continue;
         }
       }

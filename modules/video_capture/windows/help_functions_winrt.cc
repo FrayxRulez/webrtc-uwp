@@ -285,15 +285,12 @@ VideoType ToVideoType(_In_ const HString& sub_type) {
     const wchar_t* format;
     const VideoType type;
   } static format_to_type[] = {
-      {L"I420", VideoType::kI420},         {L"I420", VideoType::kI420},
-      {L"IYUV", VideoType::kIYUV},         {L"RGB24", VideoType::kRGB24},
-      {L"ABGR", VideoType::kABGR},         {L"ARGB", VideoType::kARGB},
-      {L"ARGB4444", VideoType::kARGB4444}, {L"RGB565", VideoType::kRGB565},
-      {L"RGB565", VideoType::kRGB565},     {L"ARGB1555", VideoType::kARGB1555},
-      {L"YUY2", VideoType::kYUY2},         {L"YV12", VideoType::kYV12},
-      {L"UYVY", VideoType::kUYVY},         {L"MJPEG", VideoType::kMJPEG},
-      {L"NV21", VideoType::kNV21},         {L"NV12", VideoType::kNV12},
-      {L"BGRA", VideoType::kBGRA},
+      {L"I420", VideoType::kI420},     {L"I420", VideoType::kI420},
+      {L"IYUV", VideoType::kIYUV},     {L"RGB24", VideoType::kRGB24},
+      {L"ARGB", VideoType::kARGB},     {L"RGB565", VideoType::kRGB565},
+      {L"RGB565", VideoType::kRGB565}, {L"YUY2", VideoType::kYUY2},
+      {L"YV12", VideoType::kYV12},     {L"UYVY", VideoType::kUYVY},
+      {L"MJPEG", VideoType::kMJPEG},   {L"BGRA", VideoType::kBGRA},
   };
 
   for (const auto& entry : format_to_type) {
