@@ -298,6 +298,10 @@ config("common_config") {
     defines += [ "WEBRTC_INCLUDE_INTERNAL_AUDIO_DEVICE" ]
   }
 
+  if (rtc_win_video_capture_winrt) {
+    defines += [ "WEBRTC_VIDEO_CAPTURE_WINRT" ]
+  }
+
   if (rtc_libvpx_build_vp9) {
     defines += [ "RTC_ENABLE_VP9" ]
   }
@@ -538,6 +542,13 @@ if (!build_with_chromium) {
       deps += [
         "api/audio_codecs:builtin_audio_decoder_factory",
         "api/audio_codecs:builtin_audio_encoder_factory",
+      ]
+    }
+
+    if (rtc_win_use_mf_h264) {
+      deps += [
+        "api/video_codecs:builtin_video_decoder_factory",
+        "api/video_codecs:builtin_video_encoder_factory",
       ]
     }
 
